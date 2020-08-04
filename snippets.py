@@ -37,3 +37,12 @@ logging.basicConfig(
     format="%(asctime)s | %(levelname)-8s | %(filename)s:%(lineno)s | %(message)s",
     handlers=[logging.FileHandler(os.path.join(logs_dir, log_file_name)), logging.StreamHandler(sys.stdout)],
 )
+
+
+def replace_substring(strings_list, dictionary):
+    """ Replaces / renames parts of strings in a list according to key-values pairs from a dictionary."""
+    for i, string in enumerate(strings_list):
+        for key, value in dictionary.items():
+            string = string.replace(key, value)
+            strings_list[i] = string
+    return strings_list
