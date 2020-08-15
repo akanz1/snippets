@@ -9,16 +9,15 @@ def sqlite_store(filepath, table_name, chunksize=1000):
     db = sqlite3.connect(table_name + ".sqlite")
     for chunk in pd.read_csv(filepath, chunksize=chunksize):
         chunk.to_sql(str(table_name), db, if_exists="append")
-    db.execute("CREATE INDEX my_index_column ON my_table(my_column)")
+    # db.execute("CREATE INDEX index_" + index_col + " ON " + table_name + "('" + index_col + "')")
     db.close()
 
 
-def sqlite_query(table_name, lookup_val):
+def sqlite_query(table_name, column, lookup_value):
     """query a sqlite db created with sqlite_store()"""
-    dbconn = sqlite3.connect(table_name + ".sqlite")
-    query = "SELECT * FROM " + table_name + " WHERE column = some_value"
-    values = (lookup_val,)
-    return pd.read_sql_query(query, dbconn, values)
+    db = sqlite3.connect(table_name + ".sqlite")
+    query = "SELECT * FROM " + table_name + " WHERE " + column + " = " + lookup_value
+    return pd.read_sql_query(query, db)
 
 
 # Logging
