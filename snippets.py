@@ -1,3 +1,11 @@
+# Flatten a list
+import itertools
+
+
+def flatten_list(my_list):
+    return list(itertools.chain(*my_list))
+
+
 # sqlite
 # Inspired by PyCon2020 talk by Itamar Turner-Trauring
 import pandas as pd
