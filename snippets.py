@@ -6,7 +6,7 @@ import sqlite3
 
 def sqlite_store(filepath, table_name, chunksize=1000):
     """read a csv in chunks, store it in a sqlite db and create an index for fast lookup"""
-    db = sqlite3.connect(table_name + ".sqlite")
+    db = sqlite3.connect(table_name + ".sqlite")  # ":memory:" while developing
     for chunk in pd.read_csv(filepath, chunksize=chunksize):
         chunk.to_sql(str(table_name), db, if_exists="append")
     # db.execute("CREATE INDEX index_" + index_col + " ON " + table_name + "('" + index_col + "')")
