@@ -1,16 +1,15 @@
-# Runtime decorator
+# Timing decorator
 
 import functools
-from time import time
+from time import perf_counter
 
 
-def runtime(f):
-
+def timer(f):
     @functools.wraps(f)
     def wrapper(*args, **kwargs):
-        time_start = time()
+        time_start = perf_counter()
         result = f(*args, **kwargs)
-        duration = time() - time_start
+        duration = perf_counter() - time_start
         print(f"func: {f.__name__}, args:{args}, kwargs: {kwargs} took {duration:.2f} sec")
         return result
 

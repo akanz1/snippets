@@ -47,7 +47,28 @@ logging.basicConfig(
 
 
 def replace_substring(strings_list, dictionary):
-    """ Replaces / renames parts of strings in a list according to key-values pairs from a dictionary."""
+    """ Replace parts of strings in a list according to the key-value mapping of a dictionary.
+
+    Example:
+    -------
+    l = ['gloomy', 'carrot', 'dog']
+    d = {'my': 'your', 'car': 'train'}
+
+    rename_substrings_from_dict(l, d)
+    >>> ['glooyour', 'trainrot', 'dog']
+
+    Parameters
+    ----------
+    strings_list : List
+        List of strings
+    dictionary : Dict
+        Mapping of the (sub-)strings
+
+    Returns
+    -------
+    New list with updated strings
+    """
+
     for i, string in enumerate(strings_list):
         for key, value in dictionary.items():
             string = string.replace(key, value)
