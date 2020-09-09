@@ -71,6 +71,6 @@ def replace_substring(strings_list, dictionary):
 
     for i, string in enumerate(strings_list):
         for key, value in dictionary.items():
-            string = string.replace(key, value)
+            string = string.replace("".join([key, "_"]), "".join([value, "_"]))
             strings_list[i] = string
     return strings_list
