@@ -45,7 +45,7 @@ logging.basicConfig(
     handlers=[logging.FileHandler(os.path.join(logs_dir, log_file_name)), logging.StreamHandler(sys.stdout)],
 )
 
-
+# Replace parts of strings in a list
 def replace_substring(strings_list, dictionary):
     """ Replace parts of strings in a list according to the key-value mapping of a dictionary.
 
@@ -74,3 +74,6 @@ def replace_substring(strings_list, dictionary):
             string = string.replace("".join([key, "_"]), "".join([value, "_"]))
             strings_list[i] = string
     return strings_list
+
+# export jupyter(lab) notebook to html by entering the following in conda prompt
+# jupyter nbconvert /path/to/notebooks/my_notebook.ipynb --to=html --TemplateExporter.exclude_input=True
