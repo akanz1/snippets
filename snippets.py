@@ -44,6 +44,9 @@ logging.basicConfig(
     format="%(asctime)s | %(levelname)-8s | %(filename)s:%(lineno)s | %(message)s",
     handlers=[logging.FileHandler(os.path.join(logs_dir, log_file_name)), logging.StreamHandler(sys.stdout)],
 )
+# install cygwin and use tail -f log_file_name.log in terminal to print out the most recent log messages
+
+
 
 # Replace parts of strings in a list
 def replace_substring(strings_list, dictionary):
