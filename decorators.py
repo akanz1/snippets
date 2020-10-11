@@ -55,7 +55,9 @@ def logger(to: str = "stdout"):
 
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            logging.info(f"{func.__name__}: args: {args}, kwargs: {kwargs}")
+            logging.info(
+                f"{func.__name__}()*{args}**{kwargs}: Output: {type(func(*args, **kwargs))}"
+            )
             return func(*args, **kwargs)
 
         return wrapper
