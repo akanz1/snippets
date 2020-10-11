@@ -42,15 +42,17 @@ log_file_name = datetime.now().strftime("%Y%m%d") + ".log"
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)-8s | %(filename)s:%(lineno)s | %(message)s",
-    handlers=[logging.FileHandler(os.path.join(logs_dir, log_file_name)), logging.StreamHandler(sys.stdout)],
+    handlers=[
+        logging.FileHandler(os.path.join(logs_dir, log_file_name)),
+        logging.StreamHandler(sys.stdout),
+    ],
 )
-# install cygwin and use tail -f log_file_name.log in terminal to print out the most recent log messages
-
+# install cygwin and use "tail -f log_file_name.log" in terminal to print out the most recent log messages
 
 
 # Replace parts of strings in a list
 def replace_substring(strings_list, dictionary):
-    """ Replace parts of strings in a list according to the key-value mapping of a dictionary.
+    """Replace parts of strings in a list according to the key-value mapping of a dictionary.
 
     Example:
     -------
@@ -77,6 +79,7 @@ def replace_substring(strings_list, dictionary):
             string = string.replace("".join([key, "_"]), "".join([value, "_"]))
             strings_list[i] = string
     return strings_list
+
 
 # export jupyter(lab) notebook to html by entering the following in conda prompt
 # jupyter nbconvert /path/to/notebooks/my_notebook.ipynb --to=html --TemplateExporter.exclude_input=True
