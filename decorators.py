@@ -27,6 +27,20 @@ from pathlib import Path
 
 
 def logger(to: str = "stdout", level: str = "info"):
+    """Logging decorator
+
+    Parameters
+    ----------
+    to : str, optional
+        Specify the logging destinaton, by default "stdout"
+        * "stdout", outputs to stdout
+        * "file", logs to logs/YYYYmmdd.log
+        * "both", logs to both
+
+    level : str, optional
+        Specify the logging level, by default "info"
+    """
+
     def _logger(func):
         for handler in logging.root.handlers[:]:
             logging.root.removeHandler(handler)
