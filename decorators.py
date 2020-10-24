@@ -21,42 +21,51 @@ def timer(func):
 # Logging Decorator
 import functools
 import logging
-import os
 import sys
 from datetime import datetime
+from pathlib import Path
 
 
-def logger(to: str = "stdout"):
+def logger(to: str = "stdout", level: str = "info"):
     def _logger(func):
         for handler in logging.root.handlers[:]:
             logging.root.removeHandler(handler)
+
         logs_dir = "logs"
         log_file_name = datetime.now().strftime("%Y%m%d") + ".log"
 
+        stream_handler = logging.StreamHandler(sys.stdout)
+        file_handler = logging.FileHandler(Path(logs_dir, log_file_name))
+
         if to == "stdout":
-            handlers = [logging.StreamHandler(sys.stdout)]
+            handlers = [stream_handler]
 
         elif to == "file":
-            if not os.path.exists(logs_dir):
-                os.makedirs(logs_dir)
-            handlers = [logging.FileHandler(os.path.join(logs_dir, log_file_name))]
+            Path(logs_dir).mkdir(parents=True, exist_ok=True)
+            handlers = [file_handler]
 
-        else:
+        elif to == "both":
+            Path(logs_dir).mkdir(parents=True, exist_ok=True)
             handlers = [
-                logging.StreamHandler(sys.stdout),
-                logging.FileHandler(os.path.join(logs_dir, log_file_name)),
+                stream_handler,
+                file_handler,
             ]
 
+        else:
+            raise ValueError(
+                "Please specify a valid logging destination. ('stdout', 'file', 'both')"
+            )
+
         logging.basicConfig(
-            level=logging.INFO,
             format="%(asctime)s | %(levelname)-8s | %(filename)s:%(lineno)s | %(message)s",
             handlers=handlers,
+            level=level.upper(),
         )
 
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            logging.info(
-                f"{func.__name__}()*{args}**{kwargs}: Output: {type(func(*args, **kwargs))}"
+            getattr(logging, level.lower())(
+                f"{func.__name__}(*{args}, **{kwargs}) | Output: {type(func(*args, **kwargs))}"
             )
             return func(*args, **kwargs)
 
