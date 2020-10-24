@@ -11,7 +11,7 @@ def timer(func):
         result = func(*args, **kwargs)
         duration = perf_counter() - time_start
         print(
-            f"func: {func.__name__}, args:{args}, kwargs: {kwargs} took {duration:.2f} sec"
+            f"func: {func.__name__}, args:{args}, kwargs: {kwargs} took {duration:.4f} sec"
         )
         return result
 
