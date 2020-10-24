@@ -27,7 +27,12 @@ from pathlib import Path
 
 
 def logger(to: str = "stdout", level: str = "info"):
-    """Logging decorator
+    """Logging decorator.
+
+    Example:
+    @logger(to="both", level="warning")
+    def func(x, y):
+        return x + y
 
     Parameters
     ----------
