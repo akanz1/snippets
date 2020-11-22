@@ -43,7 +43,7 @@ def logger(to: str = "stdout", level: str = "info"):
         * "both", logs to both
 
     level : str, optional
-        Specify the logging level, by default "info"
+        Specify the logging level for the given function, by default "info"
     """
 
     def _logger(func):
