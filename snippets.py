@@ -1,3 +1,7 @@
+# export jupyter(lab) notebook to html by entering the following in conda prompt
+# jupyter nbconvert /path/to/notebooks/my_notebook.ipynb --to=html --TemplateExporter.exclude_input=True
+
+
 # Flatten a list
 import itertools
 
@@ -48,38 +52,3 @@ logging.basicConfig(
     ],
 )
 # install cygwin and use "tail -f log_file_name.log" in terminal to print out the most recent log messages
-
-
-# Replace parts of strings in a list
-def replace_substring(strings_list, dictionary):
-    """Replace parts of strings in a list according to the key-value mapping of a dictionary.
-
-    Example:
-    -------
-    l = ['gloomy', 'carrot', 'dog']
-    d = {'my': 'your', 'car': 'train'}
-
-    rename_substrings_from_dict(l, d)
-    >>> ['glooyour', 'trainrot', 'dog']
-
-    Parameters
-    ----------
-    strings_list : List
-        List of strings
-    dictionary : Dict
-        Mapping of the (sub-)strings
-
-    Returns
-    -------
-    New list with updated strings
-    """
-
-    for i, string in enumerate(strings_list):
-        for key, value in dictionary.items():
-            string = string.replace("".join([key, "_"]), "".join([value, "_"]))
-            strings_list[i] = string
-    return strings_list
-
-
-# export jupyter(lab) notebook to html by entering the following in conda prompt
-# jupyter nbconvert /path/to/notebooks/my_notebook.ipynb --to=html --TemplateExporter.exclude_input=True
