@@ -10,10 +10,11 @@ def flatten_list(my_list):
     return list(itertools.chain(*my_list))
 
 
+import sqlite3
+
 # sqlite
 # Inspired by PyCon2020 talk by Itamar Turner-Trauring
 import pandas as pd
-import sqlite3
 
 
 def sqlite_store(filepath, table_name, chunksize=1000):
@@ -52,3 +53,19 @@ logging.basicConfig(
     ],
 )
 # install cygwin and use "tail -f log_file_name.log" in terminal to print out the most recent log messages
+
+
+# Nice pairplot
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+def hide_axis(*args, **kwargs):
+    plt.gca().set_visible(False)
+
+
+def nice_pairplot(df, hue_col):
+    g = sns.pairplot(df.sample(10000), hue=hue_col, palette="Paired")
+    g.map_upper(hide_axis)
+    return g
